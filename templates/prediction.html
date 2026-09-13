@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Predict whether a news article is real or fake.">
+    <title>Predict | Fake News Detection</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <a href="/" class="logo">
+            <div class="logo-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    <path d="M9 12l2 2 4-4"></path>
+                </svg>
+            </div>
+            Vera of articles
+        </a>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/predict" class="active">Predict</a>
+            <a href="/about">About</a>
+        </nav>
+    </header>
+
+    <section class="prediction-container">
+        <div class="prediction-header">
+            <h1>Analyze Authenticity</h1>
+            <p>Paste the content of a news article below, and our machine learning model will analyze the text to predict whether it is real or potentially fake news.</p>
+        </div>
+        
+        <div class="glass-card">
+            <form action="/predict" method="POST" id="prediction-form">
+                <div class="input-group">
+                    <label for="news">Enter News Text:</label>
+                    <textarea name="news" id="news" class="textarea-field" placeholder="Paste the news headline or full article text here..." required>{{ original_text if original_text else '' }}</textarea>
+                </div>
+                <button type="submit" class="btn" style="width: 100%; justify-content: center; padding: 1rem;">
+                    Analyze Now
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
+            </form>
+
+            {% if prediction_text %}
+            <div class="result-card {% if status == 'fake' %}result-fake{% elif status == 'real' %}result-real{% else %}result-error{% endif %}">
+                {{ prediction_text }}
+            </div>
+            {% endif %}
+        </div>
+    </section>
+    
+    <footer>
+        <p>&copy; 2026 Vera of articles. All rights reserved.</p>
+    </footer>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container"></div>
+
+    <!-- Notification Script -->
+    <script>
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `toast toast-${type}`;
+            
+            // Icon logic
+            let icon = 'ℹ️';
+            if (type === 'success') icon = '✅';
+            if (type === 'error') icon = '⚠️';
+            
+            toast.innerHTML = `<span>${icon}</span> <span>${message}</span>`;
+            container.appendChild(toast);
+            
+            // Remove after animation completes
+            setTimeout(() => {
+                toast.remove();
+            }, 4500);
+        }
+
+        // Intercept form submission to show loading notification
+        document.getElementById('prediction-form').addEventListener('submit', function() {
+            showToast('Submitting and re-checking the article...', 'info');
+        });
+
+        // Show notifications based on prediction results
+        window.onload = function() {
+            {% if status %}
+                const statusStr = "{{ status }}";
+                const messageStr = "{{ prediction_text }}";
+                
+                if (statusStr === "error") {
+                    showToast(messageStr, 'error');
+                } else if (statusStr === "real") {
+                    showToast('Analysis complete: No fake news indicators found.', 'success');
+                } else if (statusStr === "fake") {
+                    showToast('Analysis complete: Potential fake news detected.', 'error');
+                }
+            {% endif %}
+        };
+    </script>
+</body>
+</html>

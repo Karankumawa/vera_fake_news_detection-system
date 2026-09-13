@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="About Vera of articles - Fake news detection project.">
+    <title>About | Vera of articles</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <a href="/" class="logo">
+            <div class="logo-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    <path d="M9 12l2 2 4-4"></path>
+                </svg>
+            </div>
+            Vera of articles
+        </a>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/predict">Predict</a>
+            <a href="/about" class="active">About</a>
+        </nav>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="about-section" style="flex: 1;">
+        <div class="about-container glass-card">
+            <h2>About The Project & Author</h2>
+            <div class="about-content">
+                <p><strong>Vera of articles</strong> (formerly Fake News Detection) is a machine learning project designed to identify when a news source may be producing fake news. The core classification engine uses a Passive Aggressive Classifier and Natural Language Processing (NLP) to analyze article text and determine its authenticity with high accuracy.</p>
+                <div class="author-info">
+                    <h3>Developed by Karan Kumawat</h3>
+                    <p>Passionate about using AI and Machine Learning to build tools that solve real-world problems and combat misinformation.</p>
+                    <ul class="contact-links">
+                        <li><strong>Email:</strong> <a href="mailto:karankumawat303@gmail.com">karankumawat303@gmail.com</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <p>&copy; 2026 Vera of articles. All rights reserved.</p>
+    </footer>
+</body>
+</html>
