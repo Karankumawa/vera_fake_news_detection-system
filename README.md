@@ -6,7 +6,6 @@
 - [Project Structure](#project-structure)
 - [Datasets](#datasets)
 - [Model Name](#model-name)
-- [Images](#images)
 - [Prerequisites](#prerequisites)
 - [Getting Started](#getting-started)
 
@@ -20,7 +19,6 @@ The intended application of the project is for use in applying visibility weight
 
 ## Project Structure
 The repository is organized into the following directories and files:
-- **Images**: Contains important project images, such as block diagrams, classification reports, confusion matrices, and screenshots.
 - **dataset**: Includes the dataset, consisting of train and test data from Kaggle, which is used to train and test the model.
 - **static**: Houses static assets for the web application, including CSS, JavaScript, etc.
 - **templates**: Includes HTML templates for the web application, such as `Landingpage.html` and `prediction page.html`.
@@ -67,7 +65,7 @@ Before you begin, ensure you have met the following requirements:
 To get started with this project, follow these steps:
 1. Clone the repository to your local machine:
    ```bash
-   git clone 
+   git clone https://github.com/Karankumawa/vera_fake_news_detection-system.git
    ```
 
 2. Create a virtual environment (optional but recommended):
